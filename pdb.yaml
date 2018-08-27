@@ -1,0 +1,55 @@
+groups:
+- config: {transport: winrm}
+  groups:
+  - {name: windows_de, query: 'inventory[certname] { facts.osfamily = ''windows''
+      and (facts.qvc_site = ''HUC'' or facts.qvc_site = ''BOC'') }'}
+  name: win_nodes
+- config:
+    ssh: {host-key-check: false}
+    transport: ssh
+  groups:
+  - groups:
+    - {name: aix_de_6, query: 'inventory[certname] { facts.osfamily = ''AIX'' and
+        facts.operatingsystemmajrelease ~ ''6.*'' and (facts.qvc_site = ''HUC'' or
+        facts.qvc_site = ''BOC'') }'}
+    - {name: aix_de_7, query: 'inventory[certname] { facts.osfamily = ''AIX'' and
+        facts.operatingsystemmajrelease ~ ''7.*'' and (facts.qvc_site = ''HUC'' or
+        facts.qvc_site = ''BOC'') }'}
+    name: aix_de
+  - groups:
+    - {name: centos_de_6, query: 'inventory[certname] { facts.operatingsystem = ''CentOS''
+        and facts.operatingsystemmajrelease ~ ''6.*'' and  (facts.qvc_site = ''HUC''
+        or facts.qvc_site = ''BOC'') }'}
+    - {name: centos_de_7, query: 'inventory[certname] { facts.operatingsystem = ''CentOS''
+        and facts.operatingsystemmajrelease ~ ''7.*'' and (facts.qvc_site = ''HUC''
+        or facts.qvc_site = ''BOC'') }'}
+    name: centos_de
+  - groups:
+    - {name: redhat_de_6, query: 'inventory[certname] { facts.operatingsystem = ''RedHat''
+        and facts.operatingsystemmajrelease ~ ''6.*'' and (facts.qvc_site = ''HUC''
+        or facts.qvc_site = ''BOC'') }'}
+    - {name: redhat_de_7, query: 'inventory[certname] { facts.operatingsystem = ''RedHat''
+        and facts.operatingsystemmajrelease ~ ''7.*'' and (facts.qvc_site = ''HUC''
+        or facts.qvc_site = ''BOC'') }'}
+    name: redhat_de
+  - groups:
+    - groups:
+      - {name: sles_de_10_i386, query: 'inventory[certname] { facts.operatingsystem
+          = ''SLES'' and facts.operatingsystemmajrelease = ''10'' and facts.architecture
+          = ''i386'' and (facts.qvc_site = ''HUC'' or facts.qvc_site = ''BOC'') }'}
+      - {name: sles_de_10_x86_64, query: 'inventory[certname] { facts.operatingsystem
+          = ''SLES'' and facts.operatingsystemmajrelease = ''10'' and facts.architecture
+          = ''x86_64'' and (facts.qvc_site = ''HUC'' or facts.qvc_site = ''BOC'')
+          }'}
+      name: sles_de_10
+    - groups:
+      - {name: sles_de_11_i386, query: 'inventory[certname] { facts.operatingsystem
+          = ''SLES'' and facts.operatingsystemmajrelease = ''11'' and facts.architecture
+          = ''i386'' and (facts.qvc_site = ''HUC'' or facts.qvc_site = ''BOC'') }'}
+      - {name: sles_de_11_x86_64, query: 'inventory[certname] { facts.operatingsystem
+          = ''SLES'' and facts.operatingsystemmajrelease = ''11'' and facts.architecture
+          = ''x86_64'' and (facts.qvc_site = ''HUC'' or facts.qvc_site = ''BOC'')
+          }'}
+      name: sles_de_11
+    name: sles_de
+  name: ssh_nodes
